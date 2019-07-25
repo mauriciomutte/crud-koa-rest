@@ -1,42 +1,47 @@
 import Book from '../models/Book';
 
+const error = (err) => {
+  ctx.status = err.status || 500;
+  ctx.body = err.message;
+}
+
 export const find = async ctx => {
-  await Book.find()
-    .then(data => { ctx.body = data })
-    .catch(err => { 'error:' + err });
+  try {
+    const book = await Book.find({});
+    ctx.body = book;
+  } catch(err) {
+    return error(err);
+  }
 };
 
 export const create = async ctx => {
-  console.log(ctx.request.body);
-  if(!ctx.request.body.name || !ctx.request.body.category || !ctx.request.body.pages) {
-    return ctx.body = { error: 'Bad Data!' };
+  try {
+    const newBook = new Book(ctx.request.body);
+    await newBook.save();
+    ctx.body = newBook;
+  } catch(err) {
+    return error(err);
   }
-  const book = new Book(ctx.request.body);
-
-  await book.save()
-    .then(data => { ctx.body = data })
-    .catch(err => { 'error:' + err });
 };
 
 export const remove = async ctx => {
-  await Book.deleteOne({
-    _id: ctx.params.id 
-  })
-    .then(() => { ctx.body = {status: 'book deleted!'} })
-    .catch(err => { 'error:' + err });
+  try {
+    await Book.removeOne({_id: ctx.params.id});
+    ctx.body = {message: 'Student successfully deleted'};
+  } catch(err) {
+    return error(err);
+  }
 };
 
 export const update = async ctx => {
-  if(!ctx.request.body.name && !ctx.request.body.category && !ctx.request.body.pages) {
-    return ctx.body = { error: 'Bad Data!' };
+  try {
+    const book = await Book.findOneAndUpdate(
+      {_id: ctx.params.id}, 
+      ctx.request.body, 
+      {new: true}
+    );
+    ctx.body = book;
+  } catch (err) {
+    return error(err);
   }
-
-  await Book.findOneAndUpdate(
-    {_id: ctx.params.id},
-    {name: ctx.request.body.name,
-    category: ctx.request.body.category,
-    pages: ctx.request.body.pages}
-  )
-    .then(() => { ctx.body = {status: 'book updated!'} })
-    .catch(err => { 'error:' + err });
 };
