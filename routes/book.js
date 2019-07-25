@@ -1,5 +1,5 @@
 import Router from 'koa-router';
-import {find, create, update, remove} from '../controllers/bookController';
+import {find, create, update, remove} from '../controllers/book';
 
 const router = new Router();
 
