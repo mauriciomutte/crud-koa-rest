@@ -1,9 +1,10 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 import Logger from 'koa-logger';
-import Cors from 'koa-cors';
+import Cors from 'kcors';
 import BodyParser from 'koa-bodyparser';
 import mongoose from 'mongoose';
+
 import routes from './routes/book';
 
 const app = new Koa();

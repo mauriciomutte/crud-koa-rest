@@ -10,9 +10,9 @@
     "dev": "nodemon --exec babel-node index.js"
   },
   "dependencies": {
+    "kcors": "^2.2.2",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
-    "koa-cors": "^0.0.16",
     "koa-logger": "^3.2.1",
     "koa-router": "^7.4.0",
     "mongoose": "^5.6.6"
