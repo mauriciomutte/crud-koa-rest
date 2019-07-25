@@ -1,28 +1,24 @@
-const Book = require('../models/Book');
+import Book from '../models/Book';
 
-exports.find = async ctx => {
+export const find = async ctx => {
   await Book.find()
     .then(data => { ctx.body = data })
     .catch(err => { 'error:' + err });
 };
 
-exports.create = async ctx => {
+export const create = async ctx => {
+  console.log(ctx.request.body);
   if(!ctx.request.body.name || !ctx.request.body.category || !ctx.request.body.pages) {
     return ctx.body = { error: 'Bad Data!' };
   }
+  const book = new Book(ctx.request.body);
 
-  const book = new Book();
-  book.name = ctx.request.body.name;
-  book.category = ctx.request.body.category;
-  book.pages = ctx.request.body.pages;
-
-  await book
-    .save()
+  await book.save()
     .then(data => { ctx.body = data })
     .catch(err => { 'error:' + err });
 };
 
-exports.delete = async ctx => {
+export const remove = async ctx => {
   await Book.deleteOne({
     _id: ctx.params.id 
   })
@@ -30,7 +26,7 @@ exports.delete = async ctx => {
     .catch(err => { 'error:' + err });
 };
 
-exports.update = async ctx => {
+export const update = async ctx => {
   if(!ctx.request.body.name && !ctx.request.body.category && !ctx.request.body.pages) {
     return ctx.body = { error: 'Bad Data!' };
   }

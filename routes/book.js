@@ -1,10 +1,11 @@
-const Router = require('koa-router');
-const Ctx = require('../controllers/bookController')
-const router = new Router;
+import Router from 'koa-router';
+import {find, create, update, remove} from '../controllers/bookController';
 
-router.get('/', Ctx.find);
-router.post('/', Ctx.create);
-router.delete('/:id', Ctx.delete);
-router.put('/:id', Ctx.update);
+const router = Router();
 
-module.exports = router.routes();
+router.get('/book', find);
+router.post('/book', create);
+router.delete('/book/:id', remove);
+router.put('/book/:id', update);
+
+export default router.routes();

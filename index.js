@@ -1,10 +1,9 @@
-const Koa = require('koa');
-const Router = require('koa-router');
-const BodyParser = require('koa-bodyparser');
-const mongoose = require('mongoose');
+import Koa from 'koa';
+import BodyParser from 'koa-bodyparser';
+import mongoose from 'mongoose';
+import routes from './routes/book';
 
 const app = new Koa();
-const router = new Router();
 
 app.use(BodyParser({
   enableTypes: ['json'],
@@ -16,10 +15,7 @@ app.use(BodyParser({
 }));
 
 // API Route
-router.prefix('/v1')
-router.use('/book', require('./routes/book'))
-app.use(router.routes())
-app.use(router.allowedMethods())
+app.use(routes);
 
 // DB Connect
 mongoose.connect(
