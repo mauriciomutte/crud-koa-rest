@@ -1,11 +1,11 @@
 import Router from 'koa-router';
 import {find, create, update, remove} from '../controllers/bookController';
 
-const router = Router();
+const router = new Router();
 
-router.get('/book', find);
-router.post('/book', create);
-router.delete('/book/:id', remove);
-router.put('/book/:id', update);
+router.get('/api/book', find);
+router.post('/api/book', create);
+router.delete('/api/book/:id', remove);
+router.put('/api/book/:id', update);
 
 export default router.routes();
