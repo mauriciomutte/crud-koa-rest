@@ -1,13 +1,12 @@
 {
   "name": "koa-crud",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "repository": "git@github.com:mauriciomutte/koa-crud.git",
   "author": "Mauricio Mutte <litiobr@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon --exec babel-node index.js"
+    "dev": "nodemon --exec babel-node src/app.js"
   },
   "dependencies": {
     "kcors": "^2.2.2",
