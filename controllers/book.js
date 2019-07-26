@@ -26,8 +26,8 @@ export const create = async ctx => {
 
 export const remove = async ctx => {
   try {
-    await Book.removeOne({_id: ctx.params.id});
-    ctx.body = {message: 'Student successfully deleted'};
+    await Book.deleteOne({_id: ctx.params.id});
+    ctx.body = {message: 'Book was deleted'};
   } catch(err) {
     return error(err);
   }
