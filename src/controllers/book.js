@@ -22,4 +22,5 @@ export const update = async ctx => {
     ctx.request.body, 
     {new: true}
   );
+  ctx.body = {message: 'Book was updated', book};
 };
