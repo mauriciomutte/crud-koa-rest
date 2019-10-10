@@ -11,6 +11,11 @@ export const create = async ctx => {
   ctx.body = newBook;
 };
 
+export const read = async ctx => {
+  const book = await Book.findOne({ _id: ctx.params.id });
+  ctx.body = book;
+}
+
 export const remove = async ctx => {
   await Book.deleteOne({_id: ctx.params.id});
   ctx.body = {message: 'Book was deleted'};
