@@ -10,12 +10,10 @@ const BookSchema = new Schema({
   },
   category: {
     type: String,
-    unique : false,
     required : true
   },
   pages: {
     type: Number,
-    unique : false,
     required : true
   }
 });
