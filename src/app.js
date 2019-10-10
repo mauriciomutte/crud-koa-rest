@@ -11,6 +11,7 @@ import errorHandling from './middleware/errorHandling';
 const app = new Koa();
 const router = Router();
 
+// Middlewares
 app.use(BodyParser());
 app.use(Logger());
 app.use(Cors());
